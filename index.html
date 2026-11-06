@@ -1,0 +1,609 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Lazy Einstein Academy 🎀</title>
+
+<style>
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: 'Trebuchet MS', sans-serif;
+  background: linear-gradient(135deg,#eee5ff,#ffeaf2,#fff4df);
+  color: #44334f;
+  min-height: 100vh;
+  padding: 20px;
+}
+
+.container {
+  max-width: 650px;
+  margin: auto;
+}
+
+header {
+  text-align: center;
+  padding: 30px 10px;
+}
+
+header h1 {
+  font-size: 30px;
+  color: #8259a6;
+}
+
+header p {
+  margin-top: 10px;
+  color: #927e9e;
+}
+
+.card {
+  background: rgba(255,255,255,.88);
+  padding: 23px;
+  border-radius: 22px;
+  margin: 20px 0;
+  box-shadow: 0 7px 25px #9e7ab522;
+}
+
+h2 {
+  color: #875ca6;
+  margin-bottom: 15px;
+  font-size: 21px;
+}
+
+button {
+  border: none;
+  background: #9873b5;
+  color: white;
+  padding: 12px 18px;
+  border-radius: 12px;
+  cursor: pointer;
+  font-size: 14px;
+  margin: 5px;
+  transition: .2s;
+}
+
+button:hover {
+  transform: translateY(-2px);
+  background: #785293;
+}
+
+.envelope {
+  text-align: center;
+  padding: 35px 10px;
+}
+
+.env {
+  font-size: 85px;
+  cursor: pointer;
+  transition: .3s;
+}
+
+.env:hover {
+  transform: rotate(-8deg) scale(1.1);
+}
+
+.letter {
+  display: none;
+  text-align: left;
+  line-height: 1.9;
+  background: #fff7fc;
+  border: 1px dashed #d3a8df;
+  border-radius: 16px;
+  padding: 20px;
+  margin-top: 20px;
+  white-space: pre-line;
+}
+
+.warning {
+  background: #fff0f3;
+  border-left: 5px solid #e9a0b7;
+}
+
+.progress-bg {
+  height: 15px;
+  background: #eee3f4;
+  border-radius: 20px;
+  overflow: hidden;
+  margin: 15px 0;
+}
+
+.progress {
+  height: 100%;
+  width: 0%;
+  background: linear-gradient(90deg,#b28ad0,#f2a9c5);
+  transition: .4s;
+}
+
+.task {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 13px;
+  margin: 10px 0;
+  background: #faf5ff;
+  border-radius: 12px;
+}
+
+.task input {
+  width: 19px;
+  height: 19px;
+  accent-color: #9873b5;
+}
+
+.task span {
+  flex: 1;
+  font-size: 14px;
+}
+
+.task.done span {
+  text-decoration: line-through;
+  opacity: .55;
+}
+
+.task button {
+  padding: 7px 10px;
+  font-size: 12px;
+}
+
+.stats {
+  display: flex;
+  justify-content: space-around;
+  text-align: center;
+  gap: 10px;
+}
+
+.stats strong {
+  display: block;
+  font-size: 25px;
+  color: #966db4;
+}
+
+.roast {
+  min-height: 60px;
+  text-align: center;
+  padding: 20px;
+  background: #fff1e8;
+  border-radius: 15px;
+  line-height: 1.7;
+  margin-top: 15px;
+}
+
+.reward {
+  text-align: center;
+  padding: 20px;
+  background: #f5edff;
+  border-radius: 16px;
+  display: none;
+  line-height: 1.8;
+}
+
+footer {
+  text-align: center;
+  padding: 30px 10px;
+  color: #957f9d;
+  font-size: 13px;
+  line-height: 2;
+}
+
+.small {
+  font-size: 12px;
+  color: #98869e;
+}
+
+.music-icon {
+  font-size: 42px;
+  margin-bottom: 10px;
+}
+</style>
+</head>
+
+<body>
+
+<div class="container">
+
+<header>
+  <div style="font-size:40px">🎀 📚 🦋</div>
+  <h1>Lazy Einstein Academy</h1>
+  <p>Specially designed for Shubhra aka Miss Backlog 😭</p>
+  <p class="small">Established by the Department of Academic Discipline</p>
+</header>
+
+<!-- MUSIC PLAYER -->
+
+<div class="card" style="text-align:center">
+  <div class="music-icon">🎧</div>
+  <h2>Einstein's Study Anthem</h2>
+  <p>A little music for your comeback journey 💗</p>
+
+  <audio id="music" loop>
+    <source src="song.mp3" type="audio/mpeg">
+  </audio>
+
+  <button onclick="toggleMusic()" id="musicBtn">
+    ▶ Play Music
+  </button>
+
+  <p class="small">Tap the envelope to start the music 🎶</p>
+</div>
+
+<!-- ENVELOPE -->
+
+<div class="card envelope">
+  <h2>💌 A Special Notice For You</h2>
+  <p>Dear Lazy Einstein, you've received an official letter.</p>
+
+  <div class="env" onclick="openLetter()">💌</div>
+  <p class="small">Tap the envelope to open</p>
+
+  <div class="letter" id="letter">
+Dear Shubhra,
+
+First of all, congratulations on being appointed as the world's first Lazy Einstein. 😭
+
+Remember something?
+
+You once reached out saying you were stuck in your JEE preparation. And somewhere between those conversations, I decided that I couldn't just let you struggle with your preparation without at least trying to help.
+
+Now listen, Madam.
+
+I know JEE isn't easy. Lectures pile up, questions become difficult, and sometimes you just don't feel like studying.
+
+But you cannot keep postponing everything.
+
+You have potential. You have the ability to improve. You just need to stop negotiating with your own responsibilities.
+
+You don't need to become a topper overnight.
+You just need to become a little more consistent every day.
+
+One lecture at a time.
+One question at a time.
+One day at a time.
+
+And please, stop saying "kal se pakka". 😭
+
+I'm not here to judge your preparation. I'm here to remind you that you started this journey for a reason.
+
+So get up, Einstein.
+Your future self is waiting.
+
+With best wishes,
+Your unofficial Academic Supervisor. 🎀
+
+P.S. I reserve the right to roast you whenever you abandon your lectures.
+  </div>
+
+  <button onclick="openLetter()">Open / Close Letter</button>
+</div>
+
+<!-- WARNING -->
+
+<div class="card warning">
+  <h2>🚨 Official Academic Warning</h2>
+
+  <p><b>Student:</b> Shubhra</p>
+  <p><b>Codename:</b> Lazy Einstein</p>
+  <p><b>Department:</b> JEE Preparation</p>
+  <p><b>Current speciality:</b> Collecting backlogs instead of completing lectures.</p>
+  <p><b>Biggest enemy:</b> The magical phrase "I'll do it tomorrow."</p>
+
+  <br>
+  <p><b>Notice:</b> Your lectures are not going to complete themselves. Kindly cooperate with your own future.</p>
+</div>
+
+<!-- DASHBOARD -->
+
+<div class="card">
+  <h2>📊 Today's Study Dashboard</h2>
+
+  <div class="stats">
+    <div>
+      <strong id="completed">0</strong>
+      <span class="small">Completed</span>
+    </div>
+
+    <div>
+      <strong id="remaining">4</strong>
+      <span class="small">Remaining</span>
+    </div>
+
+    <div>
+      <strong id="percentage">0%</strong>
+      <span class="small">Progress</span>
+    </div>
+  </div>
+
+  <div class="progress-bg">
+    <div class="progress" id="progress"></div>
+  </div>
+
+  <p id="progressText" style="text-align:center">
+    Come on, Einstein. Let's get started!
+  </p>
+</div>
+
+<!-- LECTURE TRACKER -->
+
+<div class="card">
+  <h2>📚 Lecture Completion Zone</h2>
+
+  <p class="small">Tick a lecture after completing it. You can edit the targets too.</p>
+
+  <div id="tasks"></div>
+
+  <button onclick="addTask()">+ Add lecture</button>
+
+  <button onclick="resetTasks()" style="background:#d88c9c">
+    Reset today's progress
+  </button>
+</div>
+
+<!-- PROCRASTINATION -->
+
+<div class="card">
+  <h2>😭 Have you been procrastinating?</h2>
+
+  <p>Be honest. Have you been scrolling instead of studying?</p>
+
+  <div style="text-align:center;margin-top:15px">
+    <button onclick="roastMe()">YES, I WAS LAZY 😭</button>
+  </div>
+
+  <div class="roast" id="roast">
+    Waiting for your confession, Miss Backlog. 👀
+  </div>
+</div>
+
+<!-- REWARDS -->
+
+<div class="card">
+  <h2>🏆 Achievement Centre</h2>
+
+  <div class="reward" id="reward">
+    <div style="font-size:45px">🏆🎉</div>
+    <h2>MISSION COMPLETED!</h2>
+    <p>LOOK WHO FINALLY DECIDED TO STUDY!</p>
+    <p>Congratulations, Lazy Einstein.</p>
+    <p>Today you proved that you can keep your promises to yourself.</p>
+    <p>Now take a well-deserved break. 💗</p>
+  </div>
+
+  <div id="locked" style="text-align:center;padding:15px">
+    🔒 Complete all your daily lectures to unlock your reward!
+  </div>
+</div>
+
+<!-- FINAL NOTE -->
+
+<div class="card" style="text-align:center">
+  <h2>🌷 A Little Reminder</h2>
+
+  <p style="line-height:1.9">
+    Your preparation is your responsibility, but you don't have to be perfect.
+
+    Some days will be productive, some won't.
+    Just don't let one bad day become a bad week.
+
+    Small progress is still progress.
+  </p>
+
+  <br>
+  <h3 style="color:#a27ab8">YOU'VE GOT THIS, SHUBHRA! 💗</h3>
+</div>
+
+<footer>
+  Made with friendship, concern and a little bit of academic bullying. 😭
+  <br>
+  © Department of Lazy Einstein Rehabilitation
+</footer>
+
+</div>
+
+<script>
+
+// MUSIC PLAYER
+
+function toggleMusic() {
+  const music = document.getElementById("music");
+  const btn = document.getElementById("musicBtn");
+
+  if (music.paused) {
+    music.play().then(() => {
+      btn.textContent = "⏸ Pause Music";
+    }).catch(() => {
+      alert("Please check that song.mp3 is in the same folder as index.html.");
+    });
+  } else {
+    music.pause();
+    btn.textContent = "▶ Play Music";
+  }
+}
+
+// ENVELOPE + AUTOMATIC MUSIC
+
+function openLetter() {
+
+  const letter = document.getElementById("letter");
+  const music = document.getElementById("music");
+  const btn = document.getElementById("musicBtn");
+
+  letter.style.display =
+    letter.style.display === "block" ? "none" : "block";
+
+  if (music.paused) {
+    music.play().then(() => {
+      btn.textContent = "⏸ Pause Music";
+    }).catch(() => {
+      btn.textContent = "▶ Play Music";
+      alert("Please check that song.mp3 is in the same folder as index.html.");
+    });
+  }
+}
+
+// DAILY TASKS
+
+const today = new Date().toLocaleDateString();
+
+let savedDate = localStorage.getItem("studyDate");
+let tasks = [];
+
+if(savedDate === today) {
+
+  tasks = JSON.parse(localStorage.getItem("studyTasks") || "[]");
+
+} else {
+
+  tasks = [
+    {name:"Physics Lecture 01",done:false},
+    {name:"Chemistry Lecture 01",done:false},
+    {name:"Mathematics Lecture 01",done:false},
+    {name:"Question Practice / DPP",done:false}
+  ];
+
+  localStorage.setItem("studyDate",today);
+  save();
+}
+
+function save() {
+  localStorage.setItem("studyTasks",JSON.stringify(tasks));
+}
+
+function render() {
+
+  const container = document.getElementById("tasks");
+  container.innerHTML = "";
+
+  tasks.forEach((task,index) => {
+
+    const div = document.createElement("div");
+    div.className = "task" + (task.done ? " done" : "");
+
+    const checkbox = document.createElement("input");
+    checkbox.type = "checkbox";
+    checkbox.checked = task.done;
+
+    checkbox.onchange = () => {
+      tasks[index].done = checkbox.checked;
+      save();
+      render();
+    };
+
+    const span = document.createElement("span");
+    span.textContent = task.name;
+
+    const edit = document.createElement("button");
+    edit.textContent = "Edit";
+
+    edit.onclick = () => {
+      const name = prompt("Enter lecture name:",task.name);
+
+      if(name && name.trim()) {
+        tasks[index].name = name.trim();
+        save();
+        render();
+      }
+    };
+
+    div.append(checkbox,span,edit);
+    container.appendChild(div);
+  });
+
+  updateProgress();
+}
+
+// PROGRESS
+
+function updateProgress() {
+
+  const total = tasks.length;
+  const done = tasks.filter(t=>t.done).length;
+  const remaining = total-done;
+  const percent = total ? Math.round(done/total*100) : 0;
+
+  document.getElementById("completed").textContent=done;
+  document.getElementById("remaining").textContent=remaining;
+  document.getElementById("percentage").textContent=percent+"%";
+
+  document.getElementById("progress").style.width=percent+"%";
+
+  document.getElementById("progressText").textContent =
+    percent===100 ? "Einstein has finally awakened! 🎉" :
+    percent>=75 ? "Almost there! Don't give up! 💗" :
+    percent>=50 ? "Good progress. Keep going! 🌷" :
+    percent>0 ? "Nice start! Keep the momentum." :
+    "Come on, Einstein. Let's get started!";
+
+  const completed = total>0 && done===total;
+
+  document.getElementById("reward").style.display =
+    completed ? "block" : "none";
+
+  document.getElementById("locked").style.display =
+    completed ? "none" : "block";
+}
+
+// ADD TASK
+
+function addTask() {
+
+  const name = prompt("Enter your new lecture or study target:");
+
+  if(name && name.trim()) {
+    tasks.push({name:name.trim(),done:false});
+    save();
+    render();
+  }
+}
+
+// RESET
+
+function resetTasks() {
+
+  if(confirm("Are you sure you want to reset today's progress?")) {
+
+    tasks.forEach(t=>t.done=false);
+
+    save();
+    render();
+  }
+}
+
+// FUNNY ROASTS
+
+const roasts = [
+
+  "Shubhra, even your pending lectures are tired of waiting for you. 😭",
+
+  "Your teachers are uploading lectures. You're uploading excuses.",
+
+  "Einstein discovered relativity. You discovered the art of postponement.",
+
+  "Madam, your backlog has started its own coaching institute.",
+
+  "JEE is an entrance examination, not a waiting competition.",
+
+  "Your future IIT self is requesting an urgent meeting.",
+
+  "Netflix gets your attention faster than your Physics teacher. 😭",
+
+  "Kal se? Which kal, Einstein? Please specify the date."
+
+];
+
+function roastMe() {
+
+  const random = Math.floor(Math.random()*roasts.length);
+
+  document.getElementById("roast").textContent=roasts[random];
+}
+
+render();
+
+</script>
+
+</body>
+</html>
